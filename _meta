@@ -1,0 +1,14 @@
+<package project="home:sage:Mer" name="python-setuptools">
+  <title>Easily build and distribute Python packages</title>
+  <description>Setuptools is a collection of enhancements to the Python distutils that allow
+you to more easily build and distribute Python packages, especially ones that
+have dependencies on other packages.
+
+This package contains the runtime components of setuptools, necessary to
+execute the software that requires pkg_resources.py.
+
+
+
+</description>
+  <url>http://pypi.python.org/pypi/setuptools</url>
+</package>

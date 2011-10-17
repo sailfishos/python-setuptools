@@ -1,0 +1,57 @@
+* Sat Jan 30 2010 Jian-feng Ding <jian-feng.ding@intel.com> 0.6c11
+- Upgrade to 0.6c11 and enable spectacle
+
+* Fri Feb 13 2009 Xu Li <xu.li@intel.com> - 0.6c9
+- Upgrade to 0.6c9
+
+* Mon Sep 24 2007 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c7-2
+- Move pretty much everything back into runtime in order to avoid more
+  brokenness than we're trying to address with these fixes.
+
+* Fri Sep 14 2007 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c7-1
+- Upstream 0.6c7
+- Move some things from devel into runtime, in order to not break other
+  projects.
+
+* Sat Aug 18 2007 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c6-2
+- Make license tag conform to the new Licensing Guidelines
+- Move everything except pkg_resources.py into a separate -devel package
+  so we avoid bundling python-devel when it's not required (#251645)
+- Do not package tests
+
+* Sun Jun 10 2007 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c6-1
+- Upstream 0.6c6
+- Require python-devel (#240707)
+
+* Sun Jan 28 2007 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c5-1
+- Upstream 0.6c5 (known bugs, but the promised 0.6c6 is taking too long)
+
+* Tue Dec 05 2006 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c3-1
+- Upstream 0.6c3 (#218540, thanks to Michel Alexandre Salim for the patch)
+
+* Tue Sep 12 2006 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c2-1
+- Upstream 0.6c2
+- Ghostbusting
+
+* Mon Jul 31 2006 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c1-2
+- Set perms on license files (#200768)
+
+* Sat Jul 22 2006 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6c1-1
+- Version 0.6c1
+
+* Wed Jun 28 2006 Konstantin Ryabitsev <icon@fedoraproject.org> - 0.6b3-1
+- Taking over from Ignacio
+- Version 0.6b3
+- Ghost .pyo files in sitelib
+- Add license files
+- Remove manual python-abi, since we're building FC4 and up
+- Kill .exe files
+
+* Wed Feb 15 2006 Ignacio Vazquez-Abrams <ivazquez@ivazquez.net> 0.6a10-1
+- Upstream update
+
+* Mon Jan 16 2006 Ignacio Vazquez-Abrams <ivazquez@ivazquez.net> 0.6a9-1
+- Upstream update
+
+* Sat Dec 24 2005 Ignacio Vazquez-Abrams <ivazquez@ivazquez.net> 0.6a8-1
+- Initial RPM release
