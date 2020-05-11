@@ -1,6 +1,3 @@
-# fixme: should be defined in base system side
-%define python3_sitelib %(%{__python3} -Ic "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
-
 Name:           python3-setuptools
 # When updating, update the bundled libraries versions bellow!
 Version:        46.1.3
@@ -20,6 +17,7 @@ BuildArch:      noarch
 BuildRequires:  gcc
 
 BuildRequires:  python3-devel
+BuildRequires:  python3-rpm-macros
 
 %description
 Setuptools is a collection of enhancements to the Python distutils that allow
@@ -71,10 +69,10 @@ sed -i 's/ --flake8//' pytest.ini
 # This bootstraps .egg-info directory needed to build setuptools
 %{__python3} bootstrap.py
 
-%{__python3} setup.py build
+%py3_build
 
 %install
-%{__python3} setup.py install --skip-build --root %{buildroot}
+%py3_install
 
 # This is not installed (in 45.2.0 anyway), but better be safe than sorry
 rm -rf %{buildroot}%{python3_sitelib}/{setuptools,pkg_resources}/tests
