@@ -28,7 +28,6 @@ Provides: bundled(python3dist(six)) = 1.10.0
 Provides: bundled(python3dist(ordered-set)) = 3.1.1
 }
 
-%{?python_provide:%python_provide python3-setuptools}
 %{bundled}
 
 Provides:       python3dist(setuptools) = %{version}
