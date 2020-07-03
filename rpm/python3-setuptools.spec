@@ -19,14 +19,6 @@ BuildRequires:  gcc
 BuildRequires:  python3-devel
 BuildRequires:  python3-rpm-macros
 
-%description
-Setuptools is a collection of enhancements to the Python distutils that allow
-you to more easily build and distribute Python packages, especially ones that
-have dependencies on other packages.
-
-This package also contains the runtime components of setuptools, necessary to
-execute the software that requires pkg_resources.
-
 # Virtual provides for the packages bundled by setuptools.
 # You can find the versions in setuptools/setuptools/_vendor/vendored.txt
 %global bundled %{expand:
@@ -36,7 +28,6 @@ Provides: bundled(python3dist(six)) = 1.10.0
 Provides: bundled(python3dist(ordered-set)) = 3.1.1
 }
 
-Summary:        Easily build and distribute Python 3 packages
 Conflicts:      python-setuptools < %{version}-%{release}
 %{?python_provide:%python_provide python3-setuptools}
 %{bundled}
@@ -44,7 +35,7 @@ Conflicts:      python-setuptools < %{version}-%{release}
 Provides:       python3dist(setuptools) = %{version}
 Provides:       python%{python3_version}dist(setuptools) = %{version}
 
-
+%description
 Setuptools is a collection of enhancements to the Python 3 distutils that allow
 you to more easily build and distribute Python 3 packages, especially ones that
 have dependencies on other packages.
