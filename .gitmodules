@@ -1,3 +1,3 @@
 [submodule "setuptools"]
 	path = setuptools
-	url = https://git.sailfishos.org/mirror/setuptools.git
+	url = https://github.com/sailfishos-mirror/setuptools.git
