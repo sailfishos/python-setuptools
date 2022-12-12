@@ -49,9 +49,12 @@ find setuptools pkg_resources -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
 # Remove bundled exes
 rm -f setuptools/*.exe
 # These tests require internet connection
-rm setuptools/tests/test_integration.py 
+rm setuptools/tests/test_integration.py
 # We don't do linting here
 sed -i 's/ --flake8//' pytest.ini
+# Simplify egg_info tag to make build reproducible
+sed -i 's/tag_build = .post/tag_build =/' setup.cfg
+sed -i 's/tag_date = 1/tag_date = 0/' setup.cfg
 
 %build
 # Warning, different bootstrap meaning here, has nothing to do with our bcond
