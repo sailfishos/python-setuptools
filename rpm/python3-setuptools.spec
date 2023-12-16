@@ -1,16 +1,25 @@
 Name:           python3-setuptools
 # When updating, update the bundled libraries versions bellow!
-Version:        46.1.3
+Version:        69.0.2
 Release:        1
 Summary:        Easily build and distribute Python packages
 # setuptools is MIT
-# packaging is BSD or ASL 2.0
-# pyparsing is MIT
-# six is MIT
+# platformdirs is MIT
+# more-itertools is MIT
 # ordered-set is MIT
+# packaging is BSD-2-Clause OR Apache-2.0
+# importlib-metadata is Apache-2.0
+# importlib-resources is Apache-2.0
+# jaraco.text is MIT
+# typing-extensions is Python-2.0.1
+# zipp is MIT
+# nspektr is MIT
+# tomli is MIT
+# the setuptools logo is MIT
 License:        MIT and (BSD or ASL 2.0)
 URL:            https://pypi.python.org/pypi/setuptools
 Source0:        %{name}-%{version}.tar.gz
+Source1:        bootstrap.py
 
 BuildArch:      noarch
 
@@ -22,10 +31,15 @@ BuildRequires:  python3-rpm-macros
 # Virtual provides for the packages bundled by setuptools.
 # You can find the versions in setuptools/setuptools/_vendor/vendored.txt
 %global bundled %{expand:
-Provides: bundled(python3dist(packaging)) = 19.2
-Provides: bundled(python3dist(pyparsing)) = 2.2.1
-Provides: bundled(python3dist(six)) = 1.10.0
+Provides: bundled(python3dist(importlib_metadata)) = 6.0.0
+Provides: bundled(python3dist(importlib_resources)) = 5.10.2
+Provides: bundled(python3dist(jaraco.text)) = 3.7.0
+Provides: bundled(python3dist(more_itertools)) = 8.8.0
 Provides: bundled(python3dist(ordered-set)) = 3.1.1
+Provides: bundled(python3dist(packaging)) = 23.1
+Provides: bundled(python3dist(tomli)) = 2.0.1
+Provides: bundled(python3dist(typing_extensions)) = 4.0.1
+Provides: bundled(python3dist(zipp)) = 3.7.0
 }
 
 %{bundled}
@@ -56,6 +70,8 @@ sed -i 's/ --flake8//' pytest.ini
 sed -i 's/tag_build = .post/tag_build =/' setup.cfg
 sed -i 's/tag_date = 1/tag_date = 0/' setup.cfg
 
+%{__cp} %{SOURCE1} .
+
 %build
 # Warning, different bootstrap meaning here, has nothing to do with our bcond
 # This bootstraps .egg-info directory needed to build setuptools
@@ -67,15 +83,13 @@ sed -i 's/tag_date = 1/tag_date = 0/' setup.cfg
 %py3_install
 
 # This is not installed (in 45.2.0 anyway), but better be safe than sorry
-rm -rf %{buildroot}%{python3_sitelib}/{setuptools,pkg_resources}/tests
+#rm -rf %{buildroot}%{python3_sitelib}/{setuptools,pkg_resources}/tests
 
 find %{buildroot}%{python3_sitelib} -name '*.exe' | xargs rm -f
 
 %files
 %license LICENSE
-%{python3_sitelib}/easy_install.py
+%{python3_sitelib}/distutils-precedence.pth
 %{python3_sitelib}/pkg_resources/
 %{python3_sitelib}/setuptools*/
-%{python3_sitelib}/__pycache__/*
-%{_bindir}/easy_install
-%{_bindir}/easy_install-3.*
+%{python3_sitelib}/_distutils_hack/
