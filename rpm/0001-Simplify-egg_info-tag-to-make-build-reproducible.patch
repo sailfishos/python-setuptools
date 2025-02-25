@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pami Ketolainen <pami.ketolainen@jolla.com>
+Date: Tue, 25 Feb 2025 13:18:10 +0200
+Subject: [PATCH] Simplify egg_info tag to make build reproducible
+
+---
+ setup.cfg | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/setup.cfg b/setup.cfg
+index 38922089ada51dbe90c85f5d14383af32a9f6f33..96fadd5c340a3393908c0378392e79bd5dd16f13 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -1,3 +1,3 @@
+ [egg_info]
+-tag_build = .post
+-tag_date = 1
++tag_build =
++tag_date = 0
