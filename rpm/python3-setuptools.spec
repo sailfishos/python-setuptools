@@ -1,6 +1,6 @@
 Name:           python3-setuptools
 # When updating, update the bundled libraries versions bellow!
-Version:        46.1.3
+Version:        70.3.0
 Release:        1
 Summary:        Easily build and distribute Python packages
 # setuptools is MIT
@@ -11,6 +11,7 @@ Summary:        Easily build and distribute Python packages
 License:        MIT and (BSD or ASL 2.0)
 URL:            https://pypi.python.org/pypi/setuptools
 Source0:        %{name}-%{version}.tar.gz
+Patch1:         0001-Simplify-egg_info-tag-to-make-build-reproducible.patch
 
 BuildArch:      noarch
 
@@ -20,12 +21,20 @@ BuildRequires:  python3-devel
 BuildRequires:  python3-rpm-macros
 
 # Virtual provides for the packages bundled by setuptools.
-# You can find the versions in setuptools/setuptools/_vendor/vendored.txt
+# You can generate the list with gen_bundled_provides.sh
 %global bundled %{expand:
-Provides: bundled(python3dist(packaging)) = 19.2
-Provides: bundled(python3dist(pyparsing)) = 2.2.1
-Provides: bundled(python3dist(six)) = 1.10.0
+Provides: bundled(python3dist(backports.tarfile)) = 1.0.0
+Provides: bundled(python3dist(importlib-metadata)) = 6.0.0
+Provides: bundled(python3dist(importlib-resources)) = 5.10.2
+Provides: bundled(python3dist(jaraco.context)) = 5.3.0
+Provides: bundled(python3dist(jaraco.functools)) = 4.0.0
+Provides: bundled(python3dist(jaraco.text)) = 3.7.0
+Provides: bundled(python3dist(more-itertools)) = 8.8.0
 Provides: bundled(python3dist(ordered-set)) = 3.1.1
+Provides: bundled(python3dist(packaging)) = 24.0
+Provides: bundled(python3dist(tomli)) = 2.0.1
+Provides: bundled(python3dist(wheel)) = 0.43.0
+Provides: bundled(python3dist(zipp)) = 3.7.0
 }
 
 %{bundled}
@@ -44,26 +53,11 @@ execute the software that requires pkg_resources.
 %prep
 %autosetup -p1 -n %{name}-%{version}/setuptools
 
-# Strip shbang
-find setuptools pkg_resources -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
-# Remove bundled exes
-rm -f setuptools/*.exe
-# These tests require internet connection
-rm setuptools/tests/test_integration.py
-# We don't do linting here
-sed -i 's/ --flake8//' pytest.ini
-# Simplify egg_info tag to make build reproducible
-sed -i 's/tag_build = .post/tag_build =/' setup.cfg
-sed -i 's/tag_date = 1/tag_date = 0/' setup.cfg
-
 %build
-# Warning, different bootstrap meaning here, has nothing to do with our bcond
-# This bootstraps .egg-info directory needed to build setuptools
-%{__python3} bootstrap.py
-
 %py3_build
 
 %install
+export SETUPTOOLS_INSTALL_WINDOWS_SPECIFIC_FILES=0
 %py3_install
 
 # This is not installed (in 45.2.0 anyway), but better be safe than sorry
@@ -73,9 +67,7 @@ find %{buildroot}%{python3_sitelib} -name '*.exe' | xargs rm -f
 
 %files
 %license LICENSE
-%{python3_sitelib}/easy_install.py
 %{python3_sitelib}/pkg_resources/
 %{python3_sitelib}/setuptools*/
-%{python3_sitelib}/__pycache__/*
-%{_bindir}/easy_install
-%{_bindir}/easy_install-3.*
+%{python3_sitelib}/_distutils_hack/
+%{python3_sitelib}/distutils-precedence.pth
