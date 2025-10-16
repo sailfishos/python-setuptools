@@ -54,6 +54,9 @@ execute the software that requires pkg_resources.
 %autosetup -p1 -n %{name}-%{version}/setuptools
 
 %build
+%if %{?py_bootstrap:1}%{!?py_bootstrap:0}
+%{__python3} setup.py egg_info
+%endif
 %py3_build
 
 %install
