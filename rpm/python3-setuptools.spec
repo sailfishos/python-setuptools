@@ -1,6 +1,6 @@
 Name:           python3-setuptools
 # When updating, update the bundled libraries versions bellow!
-Version:        70.3.0
+Version:        78.1.1
 Release:        1
 Summary:        Easily build and distribute Python packages
 # setuptools is MIT
@@ -23,18 +23,21 @@ BuildRequires:  python3-rpm-macros
 # Virtual provides for the packages bundled by setuptools.
 # You can generate the list with gen_bundled_provides.sh
 %global bundled %{expand:
-Provides: bundled(python3dist(backports.tarfile)) = 1.0.0
-Provides: bundled(python3dist(importlib-metadata)) = 6.0.0
-Provides: bundled(python3dist(importlib-resources)) = 5.10.2
+Provides: bundled(python3dist(autocommand)) = 2.2.2
+Provides: bundled(python3dist(backports.tarfile)) = 1.2.0
+Provides: bundled(python3dist(importlib_metadata)) = 8.0.0
+Provides: bundled(python3dist(inflect)) = 7.3.1
+Provides: bundled(python3dist(jaraco.collections)) = 5.1.0
 Provides: bundled(python3dist(jaraco.context)) = 5.3.0
-Provides: bundled(python3dist(jaraco.functools)) = 4.0.0
-Provides: bundled(python3dist(jaraco.text)) = 3.7.0
-Provides: bundled(python3dist(more-itertools)) = 8.8.0
-Provides: bundled(python3dist(ordered-set)) = 3.1.1
-Provides: bundled(python3dist(packaging)) = 24.0
+Provides: bundled(python3dist(jaraco.functools)) = 4.0.1
+Provides: bundled(python3dist(jaraco.text)) = 3.12.1
+Provides: bundled(python3dist(more-itertools)) = 10.3.0
+Provides: bundled(python3dist(packaging)) = 24.2
+Provides: bundled(python3dist(platformdirs)) = 4.2.2
 Provides: bundled(python3dist(tomli)) = 2.0.1
-Provides: bundled(python3dist(wheel)) = 0.43.0
-Provides: bundled(python3dist(zipp)) = 3.7.0
+Provides: bundled(python3dist(typeguard)) = 4.3.0
+Provides: bundled(python3dist(typing_extensions)) = 4.12.2
+Provides: bundled(python3dist(zipp)) = 3.19.2
 }
 
 %{bundled}
